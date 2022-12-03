@@ -51,17 +51,17 @@ if (__name__ == '__main__'):
                                 sent = False
                                 received = ""
 
-                            elif ("Sent:" in received or "Received:" in received):
+                            elif ("Arduino:" in received):
                                 print(received)
                                 received = ""
 
                             if (sent == False):
                                 if (reset == True):
-                                    send = "motor0" + str(motor) + ";0\n"
+                                    send = "<rotate:motor0" + str(motor) + ";0>"
                                     arduino.write(send.encode('utf-8'))
                                     print("Resetting motor " + str(motor))
                                 else:
-                                    send = "motor0" + str(motor) + ";" + str(angle) + "\n"
+                                    send = "<rotate:motor0" + str(motor) + ";" + str(angle) + ">"
                                     arduino.write(send.encode('utf-8'))
                                     print("Sent: " + send.rstrip())
 
@@ -72,7 +72,7 @@ if (__name__ == '__main__'):
                             if (waiting == 1000):
                                print("Re-sending...")
                                arduino.flush()
-                               send = "motor0" + str(motor) + ";" + str(angle) + "\n"
+                               send = "<rotate:motor0" + str(motor) + ";" + str(angle) + ">"
                                arduino.write(send.encode('utf-8'))
                                print("Sent: " + send.rstrip())
                                time.sleep(1)
