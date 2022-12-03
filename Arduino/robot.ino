@@ -20,27 +20,6 @@ boolean receiving = false;
 String command = "";
 String commandData = "";
 
-//2D array to track last pulse sent to each motor
-int servoPulses[16][2] = 
-{
-  {0,0},
-  {1,0},
-  {2,0},
-  {3,0},
-  {4,0},
-  {5,0},
-  {6,0},
-  {7,0},
-  {8,0},
-  {9,0},
-  {10,0},
-  {11,0},
-  {12,0},
-  {13,0},
-  {14,0},
-  {15,0}
-};
-
 //Init servo array
 Servo Servo0;
 Servo Servo1;
@@ -214,23 +193,11 @@ void RotateMotor()
   String motorAngleStr = commandData.substring(index + 1, commandData.length());
   int motorAngle = motorAngleStr.toInt();
 
-  //Get the last pulse of the motor
-  int lastPulse = servoPulses[motor][0];
-
   //Convert angle to pulses in microseconds
   int nextPulse = map(motorAngle, angleMin, angleMax, pulseMin, pulseMax);
 
   //Rotate the requested motor to requested angle
   Servos[motor].writeMicroseconds(nextPulse);
-
-  //Save last pulse for this motor
-  servoPulses[motor][0] = nextPulse;
-
-  //Calculate pulse difference for a delay of 1 millisecond per degree
-  //Example: if we're moving from 45 degrees to 90, then delay for 45 milliseconds
-  int pulseDelay = map(abs(nextPulse - lastPulse), pulseMin, pulseMax, angleMin, angleMax);
-  
-  delay(pulseDelay);
 }
 
 void Finish()
