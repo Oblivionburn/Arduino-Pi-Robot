@@ -84,8 +84,8 @@ void setup()
 {
   for (byte i = 0; i <= 15; i++)
   {
-    //Adding 3 to start with pin D3 and end with D19 for a total of 16 servos
-    Servos[i].attach(i + 3, pulseMin, pulseMax);
+    //Adding 2 to start with pin D2 and end with D18 for a total of 16 servos
+    Servos[i].attach(i + 2, pulseMin, pulseMax);
 
     //Default to starting position 0
     Servos[i].writeMicroseconds(map(0, angleMin, angleMax, pulseMin, pulseMax));
@@ -258,7 +258,7 @@ void Finish()
 
 void Send(String data)
 {
-  if (data != '\0')
+  if (data != "")
   {
     Serial.print("Arduino: ");
     Serial.println(data);
