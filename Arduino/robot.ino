@@ -188,10 +188,11 @@ void ParseCommand()
     int index = received.indexOf(":");
 
     //If we received "<rotate:motor00;180>", get just the "rotate" command
-    command = received.substring(1, index);
+    //Note: starting/ending < and > chars will not be in the receivedData
+    command = received.substring(0, index);
 
     //If we received "<rotate:motor00;180>", get just the "motor00;180" data
-    commandData = received.substring(index + 1, received.length() - 1);
+    commandData = received.substring(index + 1, received.length());
 
     if (command == "rotate")
     {
