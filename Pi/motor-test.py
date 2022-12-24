@@ -50,11 +50,9 @@ if (__name__ == '__main__'):
 
                         if (not sent):
                             if (reset):
-                                arduino.TurnMotor(motor, 0)
+                                sent = arduino.TurnMotor(motor, 0)
                             else:
-                                arduino.TurnMotor(motor, angle)
-
-                            sent = True
+                                sent = arduino.TurnMotor(motor, angle)
                     except serial.serialutil.SerialException:
                         print("No response from device.")
 
