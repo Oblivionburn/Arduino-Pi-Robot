@@ -232,6 +232,6 @@ void Send(String data)
     Serial.println(data);
 
     //Block execution until we finished sending Serial data
-    Serial.flush();
+    //Serial.flush();
   }
 }
