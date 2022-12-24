@@ -16,6 +16,7 @@ if (__name__ == '__main__'):
     while (not reset):
         try:
             arduino = Arduino(port, 9600, 10)
+            
             if (arduino.IsConnected()):
                 while (True):
                     try:
@@ -43,26 +44,28 @@ if (__name__ == '__main__'):
 
                             sent = False
                             received = ""
-
                         elif ("Arduino:" in received):
                             print(received)
                             received = ""
+                        elif ("Error:" in received):
+                            print(received)
+                            received = ""
+                            break
+                        else:
+                            if (arduino.IsConnected()):
+                                print("Still connected. Waiting for response...")
+                                time.sleep(1)
+                            else:
+                                arduino.Reconnect()
 
                         if (not sent):
                             if (reset):
                                 sent = arduino.TurnMotor(motor, 0)
                             else:
                                 sent = arduino.TurnMotor(motor, angle)
-                    except serial.serialutil.SerialException:
-                        print("No response from device.")
-
-                        if (arduino.IsConnected()):
-                            print("Still connected. Waiting for response...")
-                            time.sleep(1)
-                        else:
-                            arduino.Reconnect()
-                    except OSError:
-                        arduino.Reconnect()
+                    except OSError as error:
+                        print(error)
+                        break
         except OSError:
             print("Port " + str(port) + " not found...")
             port += 1
