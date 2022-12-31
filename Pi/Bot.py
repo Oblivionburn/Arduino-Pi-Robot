@@ -22,7 +22,7 @@ if (__name__ == '__main__'):
                             print(received + "\n")
 
                             #Logic to set Angle and Motor
-                            motor = random.randint(0, 4)
+                            motor = random.randint(0, 3)
                             angle = random.randint(0, 359)
 
                             sent = False
