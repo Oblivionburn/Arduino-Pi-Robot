@@ -47,7 +47,7 @@ class Arduino:
                 else:
                     waiting += 1
             except Exception as error:
-                return "Error: " + error
+                return error
 
     def SendMessage(self, message: str):
         while (True):

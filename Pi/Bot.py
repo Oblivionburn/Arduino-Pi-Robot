@@ -9,7 +9,7 @@ motor = 0
 received = ""
 
 if (__name__ == '__main__'):
-    while (not reset):
+    while (True):
         try:
             arduino = Arduino(port, 9600, 10)
             
@@ -17,8 +17,8 @@ if (__name__ == '__main__'):
                 while (True):
                     try:
                         received = arduino.GetMessage(60)
-
-                        if ("Finished" in received):
+                        
+                        if (received and "Finished" in received):
                             print(received + "\n")
 
                             #Logic to set Angle and Motor
@@ -27,10 +27,10 @@ if (__name__ == '__main__'):
 
                             sent = False
                             received = ""
-                        elif ("Arduino:" in received):
+                        elif (received and "Arduino:" in received):
                             print(received)
                             received = ""
-                        elif ("Error:" in received):
+                        elif (received and "Error:" in received):
                             print(received)
                             received = ""
                             break
