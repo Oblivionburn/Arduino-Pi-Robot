@@ -46,8 +46,10 @@ class Arduino:
                     return self.serial.readline().decode('utf-8').rstrip()
                 else:
                     waiting += 1
+                    time.sleep(1)
             except Exception as error:
-                return error
+                print(error.args)
+                return None
 
     def SendMessage(self, message: str):
         while (True):
@@ -60,7 +62,7 @@ class Arduino:
                     print("Lost connection to Arduino. Reconnecting...")
                     self.Reconnect()
                 else:
-                    print(error)
+                    print(error.args)
                     return False
 
     def TurnMotor(self, motor: int, angle: int):
