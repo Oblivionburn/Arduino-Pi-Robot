@@ -36,10 +36,10 @@ class Arduino:
         return self.Connect()
 
     def GetMessage(self, timeout: int):
+        waiting = 0
+
         while (True):
             try:
-                waiting = 0
-
                 if (timeout > 0 and waiting >= timeout):
                     return None
                 elif (self.serial.inWaiting() > 0):

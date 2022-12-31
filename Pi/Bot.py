@@ -3,7 +3,6 @@ from Arduino import Arduino
 import time
 
 sent = False
-reset = False
 port = 0
 angle = 0
 motor = 0
@@ -22,22 +21,7 @@ if (__name__ == '__main__'):
                         if ("Finished" in received):
                             print(received + "\n")
 
-                            if (not reset):
-                                angle += 10
-
-                                if (angle > 180):
-                                    angle = 0
-                                    motor += 1
-
-                                    if (motor == 4):
-                                        angle = 0
-                                        motor = 0
-                                        reset = True
-                            else:
-                                motor += 1
-
-                                if (motor == 4):
-                                    break
+                            #Logic to set Angle and Motor
 
                             sent = False
                             received = ""
@@ -56,10 +40,7 @@ if (__name__ == '__main__'):
                                 arduino.Reconnect()
 
                         if (not sent):
-                            if (reset):
-                                sent = arduino.TurnMotor(motor, 0)
-                            else:
-                                sent = arduino.TurnMotor(motor, angle)
+                            sent = arduino.TurnMotor(motor, angle)
                     except OSError as error:
                         print(error)
                         break
