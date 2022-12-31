@@ -30,7 +30,7 @@ if (__name__ == '__main__'):
                         elif (received and "Arduino:" in received):
                             print(received)
                             received = ""
-                        elif (received and "Error:" in received):
+                        elif (received):
                             print(received)
                             received = ""
                             break
