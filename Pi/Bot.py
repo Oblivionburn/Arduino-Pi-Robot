@@ -1,6 +1,6 @@
 #!/usr/bin/env python 3
 from Arduino import Arduino
-import time
+import time, random
 
 sent = False
 port = 0
@@ -22,6 +22,8 @@ if (__name__ == '__main__'):
                             print(received + "\n")
 
                             #Logic to set Angle and Motor
+                            motor = random.randint(0, 4)
+                            angle = random.randint(0, 359)
 
                             sent = False
                             received = ""
